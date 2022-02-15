@@ -9,4 +9,4 @@ framework:
                   type: direct
 
         routing:
-          'App\Message\Mail': async_mailer
+          'App\Message\MailMessage': async_mailer

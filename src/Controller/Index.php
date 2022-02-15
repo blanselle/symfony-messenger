@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Message\Mail;
+use App\Message\MailMessage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,9 +31,10 @@ class Index extends AbstractController
                 ->to('you@example.com')
                 ->subject('Time for Symfony Mailer!')
                 ->html('<p>See Twig integration for better HTML integration!</p>');
-            
+
+            $bus->dispatch(new MailMessage($email));
+
             $this->addFlash('success', 'Mail envoyé');
-            $bus->dispatch(new Mail($email));
             
             return $this->redirectToRoute('app_index');
         }

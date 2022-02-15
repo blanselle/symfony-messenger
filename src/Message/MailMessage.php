@@ -4,7 +4,7 @@ namespace App\Message;
 
 use Symfony\Component\Mime\Email;
 
-class Mail
+class MailMessage
 {
     private $email;
 

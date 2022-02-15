@@ -4,7 +4,7 @@ namespace App\Handler;
 
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use App\Message\Mail;
+use App\Message\MailMessage;
 
 class MailHandler implements MessageHandlerInterface
 {
@@ -15,8 +15,8 @@ class MailHandler implements MessageHandlerInterface
         $this->mailer = $mailer;
     }
 
-    public function __invoke(Mail $mail)
+    public function __invoke(MailMessage $mailMessage)
     {
-        $this->mailer->send($mail->getEmail());
+        $this->mailer->send($mailMessage->getEmail());
     }
 }
