@@ -17,7 +17,6 @@ class Index extends AbstractController
      */
     public function index(Request $request, MailerInterface $mailer): Response
     {
-
         $form = $this->createFormBuilder()
             ->add('send', SubmitType::class)
             ->getForm();
