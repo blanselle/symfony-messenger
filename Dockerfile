@@ -27,6 +27,7 @@ RUN apk add --no-cache \
 		imagemagick \
 		libwebp-dev \
 		libxml2-dev \
+        rabbitmq-c-dev \
 	;
 
 ARG APCU_VERSION=5.1.17
@@ -64,12 +65,14 @@ RUN set -eux; \
 	pecl install \
 		apcu-${APCU_VERSION} \
 		imagick \
+        amqp \
 	; \
 	pecl clear-cache; \
 	docker-php-ext-enable \
 		apcu \
 		opcache \
 		imagick \
+        amqp \
 	; \
 	\
 	runDeps="$( \

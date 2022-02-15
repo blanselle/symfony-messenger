@@ -31,6 +31,9 @@ class Index extends AbstractController
                 ->html('<p>See Twig integration for better HTML integration!</p>');
 
             $mailer->send($email);
+            $this->addFlash('success', 'Mail envoyé');
+
+            return $this->redirectToRoute('app_index');
         }
 
         return $this->render('index.html.twig', ['form' => $form->createView()]);
