@@ -29,7 +29,7 @@ class Index extends AbstractController
                 ->to('you@example.com')
                 ->subject('Time for Symfony Mailer!')
                 ->html('<p>See Twig integration for better HTML integration!</p>');
-
+            sleep(5);
             $mailer->send($email);
             $this->addFlash('success', 'Mail envoyé');
 
