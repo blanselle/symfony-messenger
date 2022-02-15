@@ -17,7 +17,6 @@ class MailHandler implements MessageHandlerInterface
 
     public function __invoke(Mail $mail)
     {
-        sleep(5);
         $this->mailer->send($mail->getEmail());
     }
 }
