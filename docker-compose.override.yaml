@@ -1,0 +1,52 @@
+version: '3.4'
+
+services:
+  php:
+    networks:
+      messenger_network:
+        ipv4_address: 183.67.158.2
+  nginx:
+    ports:
+      - 80:80
+    networks:
+      messenger_network:
+        ipv4_address: 183.67.158.5
+  db:
+    ports:
+      - "5435:5432"
+    networks:
+      messenger_network:
+        ipv4_address: 183.67.158.3
+
+  maildev:
+    image: djfarrelly/maildev:latest
+    command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
+    ports:
+      - "8082:80"
+      - "8083:25"
+    networks:
+      messenger_network:
+        ipv4_address: 183.67.158.4
+
+  rabbitmq:
+    restart: always
+    networks:
+      messenger_network:
+        ipv4_address: 183.67.158.6
+
+###> doctrine/doctrine-bundle ###
+  database:
+    ports:
+      - "5432"
+###< doctrine/doctrine-bundle ###
+
+###> symfony/mailer ###
+  mailer:
+    image: schickling/mailcatcher
+    ports: [1025, 1080]
+###< symfony/mailer ###
+networks:
+  messenger_network:
+    ipam:
+      config:
+        - subnet: 183.67.158.0/24
