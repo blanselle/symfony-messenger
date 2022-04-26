@@ -3,6 +3,7 @@
 namespace App\Manager;
 
 use App\Services\Mailer;
+use Symfony\Component\Mime\Email;
 
 class StuffManager
 {
@@ -15,11 +16,12 @@ class StuffManager
 
     public function doStuff() 
     {
-        $this->mailer->sendEmail(
-            'hello@example.com',
-            'you@example.com',
-            'Time for Symfony Mailer!',
-            '<p>See Twig integration for better HTML integration!</p>'
-        );
+        $email = (new Email())
+            ->from('hello@example.com')
+            ->to('you@example.com')
+            ->subject('Time for Symfony Mailer!')
+            ->html('<p>See Twig integration for better HTML integration!</p>');
+
+        $this->mailer->sendEmail($email);
     }
 }

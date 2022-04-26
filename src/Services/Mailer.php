@@ -14,14 +14,8 @@ class Mailer
         $this->mailer = $mailer;
     }
 
-    public function sendEmail($from, $to, $subject, $body)
+    public function sendEmail(Email $email)
     {
-        $email = (new Email())
-            ->from($from)
-            ->to($to)
-            ->subject($subject)
-            ->html($body);
-
         $this->mailer->send($email);
     }
 }
