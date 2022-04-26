@@ -4,19 +4,19 @@ services:
   php:
     networks:
       messenger_network:
-        ipv4_address: 183.67.158.2
+        ipv4_address: 182.52.154.2
   nginx:
     ports:
       - 80:80
     networks:
       messenger_network:
-        ipv4_address: 183.67.158.5
+        ipv4_address: 182.52.154.5
   db:
     ports:
       - "5435:5432"
     networks:
       messenger_network:
-        ipv4_address: 183.67.158.3
+        ipv4_address: 182.52.154.3
 
   maildev:
     image: djfarrelly/maildev:latest
@@ -26,27 +26,15 @@ services:
       - "8083:25"
     networks:
       messenger_network:
-        ipv4_address: 183.67.158.4
+        ipv4_address: 182.52.154.4
 
   rabbitmq:
     restart: always
     networks:
       messenger_network:
-        ipv4_address: 183.67.158.6
-
-###> doctrine/doctrine-bundle ###
-  database:
-    ports:
-      - "5432"
-###< doctrine/doctrine-bundle ###
-
-###> symfony/mailer ###
-  mailer:
-    image: schickling/mailcatcher
-    ports: [1025, 1080]
-###< symfony/mailer ###
+        ipv4_address: 182.52.154.6
 networks:
   messenger_network:
     ipam:
       config:
-        - subnet: 183.67.158.0/24
+        - subnet: 182.52.154.0/24
